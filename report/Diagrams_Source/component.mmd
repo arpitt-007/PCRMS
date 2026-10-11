@@ -1,0 +1,39 @@
+flowchart TB
+  subgraph FE["React frontend (client/)"]
+    direction LR
+    Login["Login<br/>session"]
+    Dash["Dashboard"]
+    Res["ResourcePage<br/>list + form"]
+    Det["Case and<br/>Criminal pages"]
+    Rep["Reports and<br/>Search"]
+  end
+  subgraph BE["Express API (server/)"]
+    direction LR
+    Auth["Auth<br/>bcrypt + JWT"]
+    RBAC["Role<br/>middleware"]
+    CRUD["Generic CRUD<br/>router"]
+    Spec["Special<br/>endpoints"]
+    Rpt["Dashboard and<br/>report endpoints"]
+  end
+  subgraph DB["MySQL 8 database pcrms"]
+    direction LR
+    T["13 tables"]
+    V["3 views"]
+    P["3 stored<br/>procedures"]
+    TR["4 triggers"]
+  end
+  Login --> Auth
+  Dash --> Rpt
+  Res --> CRUD
+  Det --> Spec
+  Rep --> Rpt
+  Auth --> RBAC
+  RBAC --> CRUD
+  RBAC --> Spec
+  RBAC --> Rpt
+  CRUD --> T
+  Spec --> P
+  Spec --> T
+  Rpt --> V
+  P --> T
+  T --> TR

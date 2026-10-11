@@ -1,0 +1,8 @@
+flowchart LR
+  A["Administrator"]
+  O["Police Officer"]
+  V["Viewer"]
+  S(("0<br/>PCRMS"))
+  A <-->|"master data, deletions<br/>confirmations, errors"| S
+  O <-->|"complaints, FIRs, arrests,<br/>evidence, hearings<br/>records, case status, custody log"| S
+  V <-->|"search and report requests<br/>results, dashboard, reports"| S

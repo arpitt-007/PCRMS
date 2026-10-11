@@ -1,0 +1,1405 @@
+{
+ "cols": [
+  {
+   "t": "appuser",
+   "c": "user_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "PRI",
+   "d": null,
+   "e": "auto_increment",
+   "o": 1
+  },
+  {
+   "t": "appuser",
+   "c": "username",
+   "ty": "varchar(50)",
+   "n": "NO",
+   "k": "UNI",
+   "d": null,
+   "e": "",
+   "o": 2
+  },
+  {
+   "t": "appuser",
+   "c": "password_hash",
+   "ty": "varchar(100)",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 3
+  },
+  {
+   "t": "appuser",
+   "c": "role",
+   "ty": "enum('admin','officer','viewer')",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 4
+  },
+  {
+   "t": "appuser",
+   "c": "officer_id",
+   "ty": "int",
+   "n": "YES",
+   "k": "MUL",
+   "d": null,
+   "e": "",
+   "o": 5
+  },
+  {
+   "t": "arrest",
+   "c": "arrest_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "PRI",
+   "d": null,
+   "e": "auto_increment",
+   "o": 1
+  },
+  {
+   "t": "arrest",
+   "c": "date",
+   "ty": "date",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 2
+  },
+  {
+   "t": "arrest",
+   "c": "location",
+   "ty": "varchar(150)",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 3
+  },
+  {
+   "t": "arrest",
+   "c": "charges",
+   "ty": "varchar(255)",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 4
+  },
+  {
+   "t": "arrest",
+   "c": "case_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "MUL",
+   "d": null,
+   "e": "",
+   "o": 5
+  },
+  {
+   "t": "arrest",
+   "c": "officer_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "MUL",
+   "d": null,
+   "e": "",
+   "o": 6
+  },
+  {
+   "t": "arrest",
+   "c": "criminal_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "MUL",
+   "d": null,
+   "e": "",
+   "o": 7
+  },
+  {
+   "t": "cases",
+   "c": "case_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "PRI",
+   "d": null,
+   "e": "auto_increment",
+   "o": 1
+  },
+  {
+   "t": "cases",
+   "c": "fir_number",
+   "ty": "varchar(30)",
+   "n": "NO",
+   "k": "UNI",
+   "d": null,
+   "e": "",
+   "o": 2
+  },
+  {
+   "t": "cases",
+   "c": "title",
+   "ty": "varchar(150)",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 3
+  },
+  {
+   "t": "cases",
+   "c": "type",
+   "ty": "varchar(60)",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 4
+  },
+  {
+   "t": "cases",
+   "c": "description",
+   "ty": "text",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 5
+  },
+  {
+   "t": "cases",
+   "c": "filed_date",
+   "ty": "date",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 6
+  },
+  {
+   "t": "cases",
+   "c": "status",
+   "ty": "enum('Open','Under Investigation','In Court','Closed')",
+   "n": "NO",
+   "k": "MUL",
+   "d": "Open",
+   "e": "",
+   "o": 7
+  },
+  {
+   "t": "cases",
+   "c": "officer_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "MUL",
+   "d": null,
+   "e": "",
+   "o": 8
+  },
+  {
+   "t": "casestatuslog",
+   "c": "log_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "PRI",
+   "d": null,
+   "e": "auto_increment",
+   "o": 1
+  },
+  {
+   "t": "casestatuslog",
+   "c": "case_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "MUL",
+   "d": null,
+   "e": "",
+   "o": 2
+  },
+  {
+   "t": "casestatuslog",
+   "c": "old_status",
+   "ty": "varchar(30)",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 3
+  },
+  {
+   "t": "casestatuslog",
+   "c": "new_status",
+   "ty": "varchar(30)",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 4
+  },
+  {
+   "t": "casestatuslog",
+   "c": "changed_at",
+   "ty": "datetime",
+   "n": "NO",
+   "k": "",
+   "d": "CURRENT_TIMESTAMP",
+   "e": "DEFAULT_GENERATED",
+   "o": 5
+  },
+  {
+   "t": "complaint",
+   "c": "complaint_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "PRI",
+   "d": null,
+   "e": "auto_increment",
+   "o": 1
+  },
+  {
+   "t": "complaint",
+   "c": "complainant",
+   "ty": "varchar(100)",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 2
+  },
+  {
+   "t": "complaint",
+   "c": "contact",
+   "ty": "varchar(40)",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 3
+  },
+  {
+   "t": "complaint",
+   "c": "description",
+   "ty": "text",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 4
+  },
+  {
+   "t": "complaint",
+   "c": "filed_on",
+   "ty": "date",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 5
+  },
+  {
+   "t": "complaint",
+   "c": "station_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "MUL",
+   "d": null,
+   "e": "",
+   "o": 6
+  },
+  {
+   "t": "complaint",
+   "c": "case_id",
+   "ty": "int",
+   "n": "YES",
+   "k": "MUL",
+   "d": null,
+   "e": "",
+   "o": 7
+  },
+  {
+   "t": "court",
+   "c": "court_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "PRI",
+   "d": null,
+   "e": "auto_increment",
+   "o": 1
+  },
+  {
+   "t": "court",
+   "c": "name",
+   "ty": "varchar(100)",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 2
+  },
+  {
+   "t": "court",
+   "c": "location",
+   "ty": "varchar(255)",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 3
+  },
+  {
+   "t": "courtproceeding",
+   "c": "proceeding_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "PRI",
+   "d": null,
+   "e": "auto_increment",
+   "o": 1
+  },
+  {
+   "t": "courtproceeding",
+   "c": "date",
+   "ty": "date",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 2
+  },
+  {
+   "t": "courtproceeding",
+   "c": "outcome",
+   "ty": "varchar(255)",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 3
+  },
+  {
+   "t": "courtproceeding",
+   "c": "case_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "MUL",
+   "d": null,
+   "e": "",
+   "o": 4
+  },
+  {
+   "t": "courtproceeding",
+   "c": "court_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "MUL",
+   "d": null,
+   "e": "",
+   "o": 5
+  },
+  {
+   "t": "criminal",
+   "c": "criminal_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "PRI",
+   "d": null,
+   "e": "auto_increment",
+   "o": 1
+  },
+  {
+   "t": "criminal",
+   "c": "name",
+   "ty": "varchar(100)",
+   "n": "NO",
+   "k": "MUL",
+   "d": null,
+   "e": "",
+   "o": 2
+  },
+  {
+   "t": "criminal",
+   "c": "dob",
+   "ty": "date",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 3
+  },
+  {
+   "t": "criminal",
+   "c": "gender",
+   "ty": "enum('Male','Female','Other')",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 4
+  },
+  {
+   "t": "criminal",
+   "c": "address",
+   "ty": "varchar(255)",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 5
+  },
+  {
+   "t": "criminal",
+   "c": "status",
+   "ty": "enum('Wanted','Arrested','Convicted','Released')",
+   "n": "NO",
+   "k": "",
+   "d": "Wanted",
+   "e": "",
+   "o": 6
+  },
+  {
+   "t": "criminal",
+   "c": "photo",
+   "ty": "varchar(255)",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 7
+  },
+  {
+   "t": "criminalcase",
+   "c": "criminal_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "PRI",
+   "d": null,
+   "e": "",
+   "o": 1
+  },
+  {
+   "t": "criminalcase",
+   "c": "case_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "PRI",
+   "d": null,
+   "e": "",
+   "o": 2
+  },
+  {
+   "t": "criminalcase",
+   "c": "role",
+   "ty": "enum('Accused','Suspect','Convict')",
+   "n": "NO",
+   "k": "",
+   "d": "Accused",
+   "e": "",
+   "o": 3
+  },
+  {
+   "t": "evidence",
+   "c": "evidence_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "PRI",
+   "d": null,
+   "e": "auto_increment",
+   "o": 1
+  },
+  {
+   "t": "evidence",
+   "c": "type",
+   "ty": "varchar(60)",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 2
+  },
+  {
+   "t": "evidence",
+   "c": "description",
+   "ty": "text",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 3
+  },
+  {
+   "t": "evidence",
+   "c": "collected_on",
+   "ty": "date",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 4
+  },
+  {
+   "t": "evidence",
+   "c": "arrest_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "MUL",
+   "d": null,
+   "e": "",
+   "o": 5
+  },
+  {
+   "t": "evidencecustody",
+   "c": "custody_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "PRI",
+   "d": null,
+   "e": "auto_increment",
+   "o": 1
+  },
+  {
+   "t": "evidencecustody",
+   "c": "evidence_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "MUL",
+   "d": null,
+   "e": "",
+   "o": 2
+  },
+  {
+   "t": "evidencecustody",
+   "c": "officer_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "MUL",
+   "d": null,
+   "e": "",
+   "o": 3
+  },
+  {
+   "t": "evidencecustody",
+   "c": "action",
+   "ty": "varchar(100)",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 4
+  },
+  {
+   "t": "evidencecustody",
+   "c": "logged_at",
+   "ty": "datetime",
+   "n": "NO",
+   "k": "",
+   "d": "CURRENT_TIMESTAMP",
+   "e": "DEFAULT_GENERATED",
+   "o": 5
+  },
+  {
+   "t": "officer",
+   "c": "officer_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "PRI",
+   "d": null,
+   "e": "auto_increment",
+   "o": 1
+  },
+  {
+   "t": "officer",
+   "c": "badge_number",
+   "ty": "varchar(20)",
+   "n": "NO",
+   "k": "UNI",
+   "d": null,
+   "e": "",
+   "o": 2
+  },
+  {
+   "t": "officer",
+   "c": "name",
+   "ty": "varchar(100)",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 3
+  },
+  {
+   "t": "officer",
+   "c": "rank",
+   "ty": "enum('Constable','Head Constable','Sub-Inspector','Inspector','DSP','SP')",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 4
+  },
+  {
+   "t": "officer",
+   "c": "phone",
+   "ty": "varchar(20)",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 5
+  },
+  {
+   "t": "officer",
+   "c": "station_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "MUL",
+   "d": null,
+   "e": "",
+   "o": 6
+  },
+  {
+   "t": "policestation",
+   "c": "station_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "PRI",
+   "d": null,
+   "e": "auto_increment",
+   "o": 1
+  },
+  {
+   "t": "policestation",
+   "c": "name",
+   "ty": "varchar(100)",
+   "n": "NO",
+   "k": "MUL",
+   "d": null,
+   "e": "",
+   "o": 2
+  },
+  {
+   "t": "policestation",
+   "c": "address",
+   "ty": "varchar(255)",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 3
+  },
+  {
+   "t": "policestation",
+   "c": "city",
+   "ty": "varchar(80)",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 4
+  },
+  {
+   "t": "policestation",
+   "c": "phone",
+   "ty": "varchar(20)",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 5
+  },
+  {
+   "t": "v_case_overview",
+   "c": "case_id",
+   "ty": "int",
+   "n": "YES",
+   "k": "",
+   "d": "0",
+   "e": "",
+   "o": 1
+  },
+  {
+   "t": "v_case_overview",
+   "c": "fir_number",
+   "ty": "varchar(30)",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 2
+  },
+  {
+   "t": "v_case_overview",
+   "c": "title",
+   "ty": "varchar(150)",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 3
+  },
+  {
+   "t": "v_case_overview",
+   "c": "type",
+   "ty": "varchar(60)",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 4
+  },
+  {
+   "t": "v_case_overview",
+   "c": "status",
+   "ty": "enum('Open','Under Investigation','In Court','Closed')",
+   "n": "YES",
+   "k": "",
+   "d": "Open",
+   "e": "",
+   "o": 5
+  },
+  {
+   "t": "v_case_overview",
+   "c": "filed_date",
+   "ty": "date",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 6
+  },
+  {
+   "t": "v_case_overview",
+   "c": "officer",
+   "ty": "varchar(100)",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 7
+  },
+  {
+   "t": "v_case_overview",
+   "c": "station",
+   "ty": "varchar(100)",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 8
+  },
+  {
+   "t": "v_case_overview",
+   "c": "criminals",
+   "ty": "bigint",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 9
+  },
+  {
+   "t": "v_case_overview",
+   "c": "arrests",
+   "ty": "bigint",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 10
+  },
+  {
+   "t": "v_case_overview",
+   "c": "evidence_items",
+   "ty": "bigint",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 11
+  },
+  {
+   "t": "v_station_stats",
+   "c": "station_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "",
+   "d": "0",
+   "e": "",
+   "o": 1
+  },
+  {
+   "t": "v_station_stats",
+   "c": "name",
+   "ty": "varchar(100)",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 2
+  },
+  {
+   "t": "v_station_stats",
+   "c": "city",
+   "ty": "varchar(80)",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 3
+  },
+  {
+   "t": "v_station_stats",
+   "c": "officers",
+   "ty": "bigint",
+   "n": "NO",
+   "k": "",
+   "d": "0",
+   "e": "",
+   "o": 4
+  },
+  {
+   "t": "v_station_stats",
+   "c": "cases_handled",
+   "ty": "bigint",
+   "n": "NO",
+   "k": "",
+   "d": "0",
+   "e": "",
+   "o": 5
+  },
+  {
+   "t": "v_wanted_criminals",
+   "c": "criminal_id",
+   "ty": "int",
+   "n": "NO",
+   "k": "",
+   "d": "0",
+   "e": "",
+   "o": 1
+  },
+  {
+   "t": "v_wanted_criminals",
+   "c": "name",
+   "ty": "varchar(100)",
+   "n": "NO",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 2
+  },
+  {
+   "t": "v_wanted_criminals",
+   "c": "dob",
+   "ty": "date",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 3
+  },
+  {
+   "t": "v_wanted_criminals",
+   "c": "gender",
+   "ty": "enum('Male','Female','Other')",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 4
+  },
+  {
+   "t": "v_wanted_criminals",
+   "c": "address",
+   "ty": "varchar(255)",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 5
+  },
+  {
+   "t": "v_wanted_criminals",
+   "c": "photo",
+   "ty": "varchar(255)",
+   "n": "YES",
+   "k": "",
+   "d": null,
+   "e": "",
+   "o": 6
+  }
+ ],
+ "fks": [
+  {
+   "t": "appuser",
+   "c": "officer_id",
+   "rt": "officer",
+   "rc": "officer_id",
+   "dr": "SET NULL",
+   "ur": "NO ACTION",
+   "cn": "appuser_ibfk_1"
+  },
+  {
+   "t": "arrest",
+   "c": "case_id",
+   "rt": "cases",
+   "rc": "case_id",
+   "dr": "NO ACTION",
+   "ur": "NO ACTION",
+   "cn": "arrest_ibfk_1"
+  },
+  {
+   "t": "arrest",
+   "c": "officer_id",
+   "rt": "officer",
+   "rc": "officer_id",
+   "dr": "NO ACTION",
+   "ur": "NO ACTION",
+   "cn": "arrest_ibfk_2"
+  },
+  {
+   "t": "arrest",
+   "c": "criminal_id",
+   "rt": "criminal",
+   "rc": "criminal_id",
+   "dr": "NO ACTION",
+   "ur": "NO ACTION",
+   "cn": "arrest_ibfk_3"
+  },
+  {
+   "t": "cases",
+   "c": "officer_id",
+   "rt": "officer",
+   "rc": "officer_id",
+   "dr": "NO ACTION",
+   "ur": "CASCADE",
+   "cn": "cases_ibfk_1"
+  },
+  {
+   "t": "casestatuslog",
+   "c": "case_id",
+   "rt": "cases",
+   "rc": "case_id",
+   "dr": "CASCADE",
+   "ur": "NO ACTION",
+   "cn": "casestatuslog_ibfk_1"
+  },
+  {
+   "t": "complaint",
+   "c": "station_id",
+   "rt": "policestation",
+   "rc": "station_id",
+   "dr": "NO ACTION",
+   "ur": "NO ACTION",
+   "cn": "complaint_ibfk_1"
+  },
+  {
+   "t": "complaint",
+   "c": "case_id",
+   "rt": "cases",
+   "rc": "case_id",
+   "dr": "SET NULL",
+   "ur": "NO ACTION",
+   "cn": "complaint_ibfk_2"
+  },
+  {
+   "t": "courtproceeding",
+   "c": "case_id",
+   "rt": "cases",
+   "rc": "case_id",
+   "dr": "NO ACTION",
+   "ur": "NO ACTION",
+   "cn": "courtproceeding_ibfk_1"
+  },
+  {
+   "t": "courtproceeding",
+   "c": "court_id",
+   "rt": "court",
+   "rc": "court_id",
+   "dr": "NO ACTION",
+   "ur": "NO ACTION",
+   "cn": "courtproceeding_ibfk_2"
+  },
+  {
+   "t": "criminalcase",
+   "c": "criminal_id",
+   "rt": "criminal",
+   "rc": "criminal_id",
+   "dr": "CASCADE",
+   "ur": "NO ACTION",
+   "cn": "criminalcase_ibfk_1"
+  },
+  {
+   "t": "criminalcase",
+   "c": "case_id",
+   "rt": "cases",
+   "rc": "case_id",
+   "dr": "CASCADE",
+   "ur": "NO ACTION",
+   "cn": "criminalcase_ibfk_2"
+  },
+  {
+   "t": "evidence",
+   "c": "arrest_id",
+   "rt": "arrest",
+   "rc": "arrest_id",
+   "dr": "CASCADE",
+   "ur": "NO ACTION",
+   "cn": "evidence_ibfk_1"
+  },
+  {
+   "t": "evidencecustody",
+   "c": "evidence_id",
+   "rt": "evidence",
+   "rc": "evidence_id",
+   "dr": "CASCADE",
+   "ur": "NO ACTION",
+   "cn": "evidencecustody_ibfk_1"
+  },
+  {
+   "t": "evidencecustody",
+   "c": "officer_id",
+   "rt": "officer",
+   "rc": "officer_id",
+   "dr": "NO ACTION",
+   "ur": "NO ACTION",
+   "cn": "evidencecustody_ibfk_2"
+  },
+  {
+   "t": "officer",
+   "c": "station_id",
+   "rt": "policestation",
+   "rc": "station_id",
+   "dr": "NO ACTION",
+   "ur": "CASCADE",
+   "cn": "officer_ibfk_1"
+  }
+ ],
+ "idx": [
+  {
+   "t": "appuser",
+   "i": "officer_id",
+   "nu": 1,
+   "cols": "officer_id"
+  },
+  {
+   "t": "appuser",
+   "i": "PRIMARY",
+   "nu": 0,
+   "cols": "user_id"
+  },
+  {
+   "t": "appuser",
+   "i": "username",
+   "nu": 0,
+   "cols": "username"
+  },
+  {
+   "t": "arrest",
+   "i": "case_id",
+   "nu": 1,
+   "cols": "case_id"
+  },
+  {
+   "t": "arrest",
+   "i": "idx_arrest_criminal",
+   "nu": 1,
+   "cols": "criminal_id"
+  },
+  {
+   "t": "arrest",
+   "i": "officer_id",
+   "nu": 1,
+   "cols": "officer_id"
+  },
+  {
+   "t": "arrest",
+   "i": "PRIMARY",
+   "nu": 0,
+   "cols": "arrest_id"
+  },
+  {
+   "t": "cases",
+   "i": "fir_number",
+   "nu": 0,
+   "cols": "fir_number"
+  },
+  {
+   "t": "cases",
+   "i": "idx_cases_status",
+   "nu": 1,
+   "cols": "status"
+  },
+  {
+   "t": "cases",
+   "i": "officer_id",
+   "nu": 1,
+   "cols": "officer_id"
+  },
+  {
+   "t": "cases",
+   "i": "PRIMARY",
+   "nu": 0,
+   "cols": "case_id"
+  },
+  {
+   "t": "casestatuslog",
+   "i": "case_id",
+   "nu": 1,
+   "cols": "case_id"
+  },
+  {
+   "t": "casestatuslog",
+   "i": "PRIMARY",
+   "nu": 0,
+   "cols": "log_id"
+  },
+  {
+   "t": "complaint",
+   "i": "case_id",
+   "nu": 1,
+   "cols": "case_id"
+  },
+  {
+   "t": "complaint",
+   "i": "PRIMARY",
+   "nu": 0,
+   "cols": "complaint_id"
+  },
+  {
+   "t": "complaint",
+   "i": "station_id",
+   "nu": 1,
+   "cols": "station_id"
+  },
+  {
+   "t": "court",
+   "i": "PRIMARY",
+   "nu": 0,
+   "cols": "court_id"
+  },
+  {
+   "t": "courtproceeding",
+   "i": "case_id",
+   "nu": 1,
+   "cols": "case_id"
+  },
+  {
+   "t": "courtproceeding",
+   "i": "court_id",
+   "nu": 1,
+   "cols": "court_id"
+  },
+  {
+   "t": "courtproceeding",
+   "i": "PRIMARY",
+   "nu": 0,
+   "cols": "proceeding_id"
+  },
+  {
+   "t": "criminal",
+   "i": "idx_criminal_name",
+   "nu": 1,
+   "cols": "name"
+  },
+  {
+   "t": "criminal",
+   "i": "PRIMARY",
+   "nu": 0,
+   "cols": "criminal_id"
+  },
+  {
+   "t": "criminalcase",
+   "i": "case_id",
+   "nu": 1,
+   "cols": "case_id"
+  },
+  {
+   "t": "criminalcase",
+   "i": "PRIMARY",
+   "nu": 0,
+   "cols": "criminal_id,case_id"
+  },
+  {
+   "t": "evidence",
+   "i": "arrest_id",
+   "nu": 1,
+   "cols": "arrest_id"
+  },
+  {
+   "t": "evidence",
+   "i": "PRIMARY",
+   "nu": 0,
+   "cols": "evidence_id"
+  },
+  {
+   "t": "evidencecustody",
+   "i": "evidence_id",
+   "nu": 1,
+   "cols": "evidence_id"
+  },
+  {
+   "t": "evidencecustody",
+   "i": "officer_id",
+   "nu": 1,
+   "cols": "officer_id"
+  },
+  {
+   "t": "evidencecustody",
+   "i": "PRIMARY",
+   "nu": 0,
+   "cols": "custody_id"
+  },
+  {
+   "t": "officer",
+   "i": "badge_number",
+   "nu": 0,
+   "cols": "badge_number"
+  },
+  {
+   "t": "officer",
+   "i": "idx_officer_station",
+   "nu": 1,
+   "cols": "station_id"
+  },
+  {
+   "t": "officer",
+   "i": "PRIMARY",
+   "nu": 0,
+   "cols": "officer_id"
+  },
+  {
+   "t": "policestation",
+   "i": "name",
+   "nu": 0,
+   "cols": "name,city"
+  },
+  {
+   "t": "policestation",
+   "i": "PRIMARY",
+   "nu": 0,
+   "cols": "station_id"
+  }
+ ],
+ "views": [
+  {
+   "n": "v_case_overview"
+  },
+  {
+   "n": "v_station_stats"
+  },
+  {
+   "n": "v_wanted_criminals"
+  }
+ ],
+ "procs": [
+  {
+   "n": "sp_close_case",
+   "ty": "PROCEDURE"
+  },
+  {
+   "n": "sp_criminal_history",
+   "ty": "PROCEDURE"
+  },
+  {
+   "n": "sp_register_fir",
+   "ty": "PROCEDURE"
+  }
+ ],
+ "trgs": [
+  {
+   "n": "trg_arrest_after_insert",
+   "t": "arrest",
+   "tm": "AFTER",
+   "ev": "INSERT"
+  },
+  {
+   "n": "trg_proceeding_after_insert",
+   "t": "courtproceeding",
+   "tm": "AFTER",
+   "ev": "INSERT"
+  },
+  {
+   "n": "trg_case_status_log",
+   "t": "cases",
+   "tm": "AFTER",
+   "ev": "UPDATE"
+  },
+  {
+   "n": "trg_evidence_custody_init",
+   "t": "evidence",
+   "tm": "AFTER",
+   "ev": "INSERT"
+  }
+ ],
+ "tabs": [
+  {
+   "n": "appuser",
+   "e": "InnoDB",
+   "c": "utf8mb4_0900_ai_ci"
+  },
+  {
+   "n": "arrest",
+   "e": "InnoDB",
+   "c": "utf8mb4_0900_ai_ci"
+  },
+  {
+   "n": "cases",
+   "e": "InnoDB",
+   "c": "utf8mb4_0900_ai_ci"
+  },
+  {
+   "n": "casestatuslog",
+   "e": "InnoDB",
+   "c": "utf8mb4_0900_ai_ci"
+  },
+  {
+   "n": "complaint",
+   "e": "InnoDB",
+   "c": "utf8mb4_0900_ai_ci"
+  },
+  {
+   "n": "court",
+   "e": "InnoDB",
+   "c": "utf8mb4_0900_ai_ci"
+  },
+  {
+   "n": "courtproceeding",
+   "e": "InnoDB",
+   "c": "utf8mb4_0900_ai_ci"
+  },
+  {
+   "n": "criminal",
+   "e": "InnoDB",
+   "c": "utf8mb4_0900_ai_ci"
+  },
+  {
+   "n": "criminalcase",
+   "e": "InnoDB",
+   "c": "utf8mb4_0900_ai_ci"
+  },
+  {
+   "n": "evidence",
+   "e": "InnoDB",
+   "c": "utf8mb4_0900_ai_ci"
+  },
+  {
+   "n": "evidencecustody",
+   "e": "InnoDB",
+   "c": "utf8mb4_0900_ai_ci"
+  },
+  {
+   "n": "officer",
+   "e": "InnoDB",
+   "c": "utf8mb4_0900_ai_ci"
+  },
+  {
+   "n": "policestation",
+   "e": "InnoDB",
+   "c": "utf8mb4_0900_ai_ci"
+  }
+ ],
+ "ver": "8.4.9"
+}

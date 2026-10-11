@@ -1,0 +1,23 @@
+sequenceDiagram
+  autonumber
+  actor Ofc as Officer
+  participant UI as React UI
+  participant API as Express API
+  participant DB as MySQL
+  Ofc->>UI: Fill arrest form, Save
+  UI->>API: POST /api/arrests + Bearer token
+  API->>API: verify JWT, check role
+  alt token invalid
+    API-->>UI: 401 Login required
+  else role not allowed
+    API-->>UI: 403 Not allowed
+  else allowed
+    API->>DB: INSERT INTO Arrest (parameterized)
+    Note over DB: trigger trg_arrest_after_insert<br/>criminal = Arrested<br/>case = Under Investigation<br/>status change logged
+    DB-->>API: insertId
+    API-->>UI: 201 arrest_id
+    UI->>API: GET /api/arrests
+    API->>DB: SELECT joined rows
+    DB-->>UI: refreshed list
+    UI-->>Ofc: modal closes, new row shown
+  end

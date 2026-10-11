@@ -1,0 +1,47 @@
+classDiagram
+  direction TB
+  class App
+  class Login
+  class Dashboard
+  class ResourcePage {
+    rows
+    load()
+    save()
+    remove()
+  }
+  class FormModal
+  class CustodyModal
+  class CaseDetail
+  class CriminalProfile
+  class Reports
+  class ApiClient {
+    api(path, method, body)
+  }
+  class ExpressServer {
+    login()
+    auth + role check
+    crud routes
+    report routes
+  }
+  class ResourcesConfig {
+    table
+    pk
+    fields
+  }
+  class DbPool {
+    query()
+  }
+  App --> Login
+  App --> Dashboard
+  App --> ResourcePage
+  App --> CaseDetail
+  App --> CriminalProfile
+  App --> Reports
+  ResourcePage *-- FormModal
+  ResourcePage *-- CustodyModal
+  ResourcePage ..> ApiClient
+  Dashboard ..> ApiClient
+  CaseDetail ..> ApiClient
+  ApiClient ..> ExpressServer : HTTP JSON
+  ExpressServer ..> ResourcesConfig
+  ExpressServer --> DbPool

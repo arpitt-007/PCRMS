@@ -1,0 +1,221 @@
+{
+  "ranAt": "2026-10-09T16:38:17.580Z",
+  "results": [
+    {
+      "id": "UI-01",
+      "feature": "Login page",
+      "pre": "Logged out",
+      "input": "Open /",
+      "expected": "Hero, form and demo-account chips are shown",
+      "actual": "Form, hero text and demo chips visible",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-02",
+      "feature": "Login error state",
+      "pre": "Logged out",
+      "input": "admin / wrongpass, Sign in",
+      "expected": "Error banner \"Invalid credentials\", user stays on login",
+      "actual": "Banner \"Invalid credentials\" shown",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-03",
+      "feature": "Login success",
+      "pre": "Seeded admin user",
+      "input": "admin / admin123, Sign in",
+      "expected": "Dashboard with welcome banner is shown",
+      "actual": "Dashboard shown: \"Welcome back, admin\"",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-04",
+      "feature": "Dashboard",
+      "pre": "Seed data",
+      "input": "Open /",
+      "expected": "Stat cards, charts and upcoming hearings render",
+      "actual": "All three sections rendered",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-05",
+      "feature": "Cases / FIR list page",
+      "pre": "Seed data",
+      "input": "Open /cases",
+      "expected": "Page lists seeded rows (contains \"FIR/2026/001\")",
+      "actual": "Rows rendered from the database",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-06",
+      "feature": "Complaints list page",
+      "pre": "Seed data",
+      "input": "Open /complaints",
+      "expected": "Page lists seeded rows (contains \"M. Patel\")",
+      "actual": "Rows rendered from the database",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-07",
+      "feature": "Criminals list page",
+      "pre": "Seed data",
+      "input": "Open /criminals",
+      "expected": "Page lists seeded rows (contains \"Vikram Rao\")",
+      "actual": "Rows rendered from the database",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-08",
+      "feature": "Arrests list page",
+      "pre": "Seed data",
+      "input": "Open /arrests",
+      "expected": "Page lists seeded rows (contains \"Theft (IPC 379)\")",
+      "actual": "Rows rendered from the database",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-09",
+      "feature": "Evidence list page",
+      "pre": "Seed data",
+      "input": "Open /evidence",
+      "expected": "Page lists seeded rows (contains \"Recovered mobile phone\")",
+      "actual": "Rows rendered from the database",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-10",
+      "feature": "Court Proceedings list page",
+      "pre": "Seed data",
+      "input": "Open /proceedings",
+      "expected": "Page lists seeded rows (contains \"Adjourned\")",
+      "actual": "Rows rendered from the database",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-11",
+      "feature": "Officers list page",
+      "pre": "Seed data",
+      "input": "Open /officers",
+      "expected": "Page lists seeded rows (contains \"R. Kumar\")",
+      "actual": "Rows rendered from the database",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-12",
+      "feature": "Stations list page",
+      "pre": "Seed data",
+      "input": "Open /stations",
+      "expected": "Page lists seeded rows (contains \"Central Station\")",
+      "actual": "Rows rendered from the database",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-13",
+      "feature": "Courts list page",
+      "pre": "Seed data",
+      "input": "Open /courts",
+      "expected": "Page lists seeded rows (contains \"District Court\")",
+      "actual": "Rows rendered from the database",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-14",
+      "feature": "Case detail page",
+      "pre": "Case 1 exists",
+      "input": "Open /cases/1",
+      "expected": "Title, linked criminals, hearings, evidence and status history shown",
+      "actual": "All sections present",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-15",
+      "feature": "Criminal profile page",
+      "pre": "Criminal 1 exists",
+      "input": "Open /criminals/1",
+      "expected": "Profile, case history and arrests shown",
+      "actual": "Profile with both tables",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-16",
+      "feature": "Add form with FK dropdowns",
+      "pre": "Admin",
+      "input": "Arrests > Add new",
+      "expected": "Modal with Criminal, Case, Officer dropdowns populated",
+      "actual": "Modal open, dropdowns populated",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-17",
+      "feature": "Chain-of-custody dialog",
+      "pre": "Evidence 2 has a custody row",
+      "input": "Evidence > Custody",
+      "expected": "Dialog shows custody history",
+      "actual": "Custody history displayed",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-18",
+      "feature": "Status filter",
+      "pre": "Case 1 is In Court",
+      "input": "Cases > filter \"In Court\"",
+      "expected": "Only In Court cases remain",
+      "actual": "FIR/2026/001 shown, others hidden",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-19",
+      "feature": "Empty state",
+      "pre": "None",
+      "input": "Criminals > search \"zzzz\"",
+      "expected": "Friendly \"No matching records\" message",
+      "actual": "Empty state shown",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-20",
+      "feature": "Reports page",
+      "pre": "Seed data",
+      "input": "Open /reports",
+      "expected": "Report table plus Export CSV and Print buttons",
+      "actual": "Table and buttons present",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-21",
+      "feature": "Global search",
+      "pre": "Seed data",
+      "input": "Type \"theft\" in top search, Enter",
+      "expected": "Results page lists the matching case",
+      "actual": "Results page with FIR/2026/001",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-22",
+      "feature": "Database error shown in UI",
+      "pre": "Officer 3 handles a case",
+      "input": "Officers > Delete first officer",
+      "expected": "Red error banner explains the foreign-key violation; row remains",
+      "actual": "Banner shows foreign key constraint message",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-23",
+      "feature": "Viewer role is read-only",
+      "pre": "Viewer login",
+      "input": "Open Cases as viewer",
+      "expected": "No Add, Edit or Delete controls",
+      "actual": "No write controls rendered",
+      "status": "Pass"
+    },
+    {
+      "id": "UI-24",
+      "feature": "Mobile layout and drawer",
+      "pre": "Viewport 390x844",
+      "input": "Open Cases, tap menu button",
+      "expected": "Drawer opens; page has no horizontal overflow",
+      "actual": "Drawer opened, no horizontal overflow",
+      "status": "Pass"
+    }
+  ]
+}

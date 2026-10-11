@@ -1,0 +1,445 @@
+{
+  "ranAt": "2026-10-09T16:32:41.661Z",
+  "results": [
+    {
+      "id": "TC-01",
+      "feature": "Authentication",
+      "name": "Valid login",
+      "pre": "Seeded user admin exists",
+      "input": "admin / correct password",
+      "expected": "HTTP 200, JWT token and user role returned",
+      "actual": "HTTP 200, token issued, role=admin",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-02",
+      "feature": "Authentication",
+      "name": "Wrong password rejected",
+      "pre": "Seeded user admin exists",
+      "input": "admin / wrong password",
+      "expected": "HTTP 401, no token",
+      "actual": "HTTP 401 \"Invalid credentials\"",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-03",
+      "feature": "Authentication",
+      "name": "Unknown user rejected",
+      "pre": "None",
+      "input": "unknown user / any password",
+      "expected": "HTTP 401",
+      "actual": "HTTP 401",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-04",
+      "feature": "Authentication",
+      "name": "Protected route without token",
+      "pre": "None",
+      "input": "GET /api/cases with no Authorization header",
+      "expected": "HTTP 401",
+      "actual": "HTTP 401 \"Login required\"",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-05",
+      "feature": "Authentication",
+      "name": "Tampered token rejected",
+      "pre": "None",
+      "input": "GET /api/cases with an invalid JWT",
+      "expected": "HTTP 401",
+      "actual": "HTTP 401",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-06",
+      "feature": "Authentication",
+      "name": "Password hash not stored in plain text",
+      "pre": "Database seeded",
+      "input": "SELECT password_hash FROM AppUser",
+      "expected": "Values are bcrypt hashes, not the plain passwords",
+      "actual": "3 users, all hashes start with $2 (bcrypt)",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-07",
+      "feature": "Authorization",
+      "name": "Viewer can read",
+      "pre": "Logged in as viewer",
+      "input": "GET /api/cases",
+      "expected": "HTTP 200 with rows",
+      "actual": "HTTP 200, 3 rows",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-08",
+      "feature": "Authorization",
+      "name": "Viewer cannot create",
+      "pre": "Logged in as viewer",
+      "input": "POST /api/courts",
+      "expected": "HTTP 403",
+      "actual": "HTTP 403 \"Your role is not allowed\"",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-09",
+      "feature": "Authorization",
+      "name": "Officer can create",
+      "pre": "Logged in as officer",
+      "input": "POST /api/courts {name, location}",
+      "expected": "HTTP 201 with new id",
+      "actual": "HTTP 201, court_id=3",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-10",
+      "feature": "Authorization",
+      "name": "Officer cannot delete",
+      "pre": "Logged in as officer; court created above",
+      "input": "DELETE /api/courts/:id",
+      "expected": "HTTP 403, record remains",
+      "actual": "HTTP 403, record still present",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-11",
+      "feature": "Authorization",
+      "name": "Admin can delete",
+      "pre": "Logged in as admin; court created above",
+      "input": "DELETE /api/courts/:id",
+      "expected": "HTTP 200, record removed",
+      "actual": "HTTP 200, record removed",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-12",
+      "feature": "CRUD",
+      "name": "Create station",
+      "pre": "Admin token",
+      "input": "POST /api/stations with valid body",
+      "expected": "HTTP 201, row inserted",
+      "actual": "HTTP 201, station_id=3",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-13",
+      "feature": "CRUD",
+      "name": "Read station by id",
+      "pre": "Station created",
+      "input": "GET /api/stations/:id",
+      "expected": "HTTP 200 with the same values",
+      "actual": "HTTP 200, city=Testville",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-14",
+      "feature": "CRUD",
+      "name": "Update station",
+      "pre": "Station created",
+      "input": "PUT /api/stations/:id {city: \"Newtown\"}",
+      "expected": "HTTP 200, value changed in DB",
+      "actual": "HTTP 200, DB city=Newtown",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-15",
+      "feature": "CRUD",
+      "name": "Search filter",
+      "pre": "Seed data",
+      "input": "GET /api/criminals?q=Vikram",
+      "expected": "Only matching rows returned",
+      "actual": "1 row: Vikram Rao",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-16",
+      "feature": "CRUD",
+      "name": "Status filter",
+      "pre": "Seed data",
+      "input": "GET /api/cases?status=Closed on seed data",
+      "expected": "Empty list (no closed cases yet)",
+      "actual": "HTTP 200, 0 rows",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-17",
+      "feature": "CRUD",
+      "name": "Delete station",
+      "pre": "Station created",
+      "input": "DELETE /api/stations/:id",
+      "expected": "HTTP 200, row removed",
+      "actual": "HTTP 200, row removed",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-18",
+      "feature": "Validation",
+      "name": "Missing required column",
+      "pre": "Admin token",
+      "input": "POST /api/stations with only {name}",
+      "expected": "Rejected with an error, nothing inserted",
+      "actual": "HTTP 500, row count unchanged (2)",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-19",
+      "feature": "Validation",
+      "name": "Invalid ENUM value",
+      "pre": "Admin token",
+      "input": "PUT /api/criminals/1 {status: \"Flying\"}",
+      "expected": "Rejected, status unchanged",
+      "actual": "HTTP 500, status still Arrested",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-20",
+      "feature": "Validation",
+      "name": "Duplicate unique FIR number",
+      "pre": "FIR/2026/001 exists",
+      "input": "POST /api/cases with fir_number FIR/2026/001",
+      "expected": "HTTP 409 duplicate",
+      "actual": "HTTP 409 (duplicate entry)",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-21",
+      "feature": "Validation",
+      "name": "Foreign key must exist",
+      "pre": "Admin token",
+      "input": "POST /api/officers with station_id 9999",
+      "expected": "HTTP 409 FK violation",
+      "actual": "HTTP 409 (foreign key constraint fails)",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-22",
+      "feature": "Validation",
+      "name": "Cannot delete referenced parent row",
+      "pre": "Officer 1 handles cases",
+      "input": "DELETE /api/officers/1",
+      "expected": "HTTP 409, officer remains",
+      "actual": "HTTP 409, officer still present",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-23",
+      "feature": "Validation",
+      "name": "SQL injection attempt in search",
+      "pre": "Seed data",
+      "input": "GET /api/search?q=' OR 1=1; DROP TABLE Criminal;--",
+      "expected": "No error, tables intact (parameterized queries)",
+      "actual": "HTTP 200, Criminal table intact (3 rows)",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-24",
+      "feature": "Stored procedure",
+      "name": "sp_register_fir with complaint",
+      "pre": "Seeded complaint 1 exists",
+      "input": "POST /api/fir {FIR/2026/090, complaint_id 1}",
+      "expected": "Case created with status Open and today as filed date; complaint linked to new case",
+      "actual": "HTTP 201, case_id=5, status=Open, complaint 1 now linked",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-25",
+      "feature": "Stored procedure",
+      "name": "sp_register_fir rolls back on error",
+      "pre": "FIR/2026/090 exists",
+      "input": "POST /api/fir with duplicate FIR number",
+      "expected": "HTTP 409, no extra case row",
+      "actual": "HTTP 409, case count unchanged (4)",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-26",
+      "feature": "Trigger",
+      "name": "Arrest trigger updates criminal and case",
+      "pre": "Criminal 2 Wanted; case 2 Open",
+      "input": "POST /api/arrests {criminal 2, case 2}",
+      "expected": "Criminal status=Arrested, case status=Under Investigation",
+      "actual": "criminal 2 = Arrested, case 2 = Under Investigation",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-27",
+      "feature": "Trigger",
+      "name": "Arrest trigger links criminal to case",
+      "pre": "Arrest above created",
+      "input": "Query CriminalCase for (2,2)",
+      "expected": "Row exists (already linked as Suspect)",
+      "actual": "1 row, role=Suspect (INSERT IGNORE kept the original)",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-28",
+      "feature": "Trigger",
+      "name": "Status change logged",
+      "pre": "Case 2 changed status above",
+      "input": "Query CaseStatusLog for case 2",
+      "expected": "Row Open -> Under Investigation",
+      "actual": "Log row: Open -> Under Investigation",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-29",
+      "feature": "Trigger",
+      "name": "Evidence creates custody entry",
+      "pre": "Arrest above created",
+      "input": "POST /api/evidence for that arrest",
+      "expected": "EvidenceCustody row \"Collected and logged\" created automatically",
+      "actual": "1 custody row created by trigger",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-30",
+      "feature": "API",
+      "name": "Add custody event",
+      "pre": "Evidence created",
+      "input": "POST /api/evidence/:id/custody then GET",
+      "expected": "Two entries in chronological order",
+      "actual": "HTTP 201, 2 custody entries",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-31",
+      "feature": "Trigger",
+      "name": "Court proceeding moves case to In Court",
+      "pre": "Case 3 status Open",
+      "input": "POST /api/proceedings for case 3",
+      "expected": "Case 3 status = In Court",
+      "actual": "case 3 = In Court",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-32",
+      "feature": "Stored procedure",
+      "name": "sp_close_case",
+      "pre": "Case 2 exists",
+      "input": "POST /api/cases/2/close",
+      "expected": "Case 2 status = Closed and the change is logged",
+      "actual": "status=Closed, log row written",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-33",
+      "feature": "Stored procedure",
+      "name": "sp_criminal_history",
+      "pre": "Criminal 3 linked to case 3 in seed data",
+      "input": "GET /api/criminals/3/history",
+      "expected": "Case list and arrests returned",
+      "actual": "HTTP 200, 1 case(s) in history",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-34",
+      "feature": "Constraint",
+      "name": "ON DELETE CASCADE on CriminalCase",
+      "pre": "Case created by the FIR test",
+      "input": "Link criminal 3 to new case, delete the case",
+      "expected": "Junction rows removed automatically",
+      "actual": "junction rows 1 -> 0",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-35",
+      "feature": "Constraint",
+      "name": "ON DELETE SET NULL on Complaint.case_id",
+      "pre": "Complaint 1 was linked to the deleted case",
+      "input": "Query Complaint 1 after case deletion",
+      "expected": "Complaint still exists with case_id NULL",
+      "actual": "complaint kept, case_id = NULL",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-36",
+      "feature": "Reports",
+      "name": "Dashboard totals",
+      "pre": "Seed + test data",
+      "input": "GET /api/dashboard",
+      "expected": "Totals and chart data present",
+      "actual": "HTTP 200, totals.cases=3, upcoming=2",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-37",
+      "feature": "Reports",
+      "name": "Report: case-overview",
+      "pre": "Database populated",
+      "input": "GET /api/reports/case-overview",
+      "expected": "HTTP 200 and a JSON array",
+      "actual": "HTTP 200, 3 row(s)",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-38",
+      "feature": "Reports",
+      "name": "Report: wanted-criminals",
+      "pre": "Database populated",
+      "input": "GET /api/reports/wanted-criminals",
+      "expected": "HTTP 200 and a JSON array",
+      "actual": "HTTP 200, 0 row(s)",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-39",
+      "feature": "Reports",
+      "name": "Report: station-stats",
+      "pre": "Database populated",
+      "input": "GET /api/reports/station-stats",
+      "expected": "HTTP 200 and a JSON array",
+      "actual": "HTTP 200, 2 row(s)",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-40",
+      "feature": "Reports",
+      "name": "Report: officer-workload",
+      "pre": "Database populated",
+      "input": "GET /api/reports/officer-workload",
+      "expected": "HTTP 200 and a JSON array",
+      "actual": "HTTP 200, 3 row(s)",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-41",
+      "feature": "Reports",
+      "name": "Report: repeat-offenders",
+      "pre": "Database populated",
+      "input": "GET /api/reports/repeat-offenders",
+      "expected": "HTTP 200 and a JSON array",
+      "actual": "HTTP 200, 0 row(s)",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-42",
+      "feature": "Reports",
+      "name": "Report: status-log",
+      "pre": "Database populated",
+      "input": "GET /api/reports/status-log",
+      "expected": "HTTP 200 and a JSON array",
+      "actual": "HTTP 200, 5 row(s)",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-43",
+      "feature": "Reports",
+      "name": "Unknown report",
+      "pre": "None",
+      "input": "GET /api/reports/nope",
+      "expected": "HTTP 404",
+      "actual": "HTTP 404",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-44",
+      "feature": "Search",
+      "name": "Global search",
+      "pre": "Seed data",
+      "input": "GET /api/search?q=theft",
+      "expected": "Matching case returned",
+      "actual": "HTTP 200, 1 case match(es)",
+      "status": "Pass"
+    }
+  ]
+}
